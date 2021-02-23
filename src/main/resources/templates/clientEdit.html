@@ -1,0 +1,124 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <th:block th:include="fragments/general.html :: head"/>
+    <title>Клиент</title>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <nav th:replace="fragments/general.html :: header(page = 'myProfile')"></nav>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row d-flex justify-content-center">
+                <form class="col-md-6" th:action="@{~/clients/save}" th:object="${client}" method="post">
+                    <div class="form-group col-xs-6">
+                        <label for="lastName">Фамилия</label>
+                        <input type="text" class="form-control" id="lastName" th:field="*{lastName}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="firstName">Имя</label>
+                        <input type="text" class="form-control" id="firstName" th:field="*{firstName}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="patronymic">Отчество</label>
+                        <input type="text" class="form-control" id="patronymic" th:field="*{patronymic}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="birthDate">Дата рождения</label>
+                        <input type="date" class="form-control" id="birthDate" th:field="*{birthDate}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="passportSeries">Серия пасспорта (формат: AA)</label>
+                        <input type="text" class="form-control" id="passportSeries" th:field="*{passportSeries}" pattern="^[A-Z]{2}$" minlength="2" maxlength="2" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="passportNumber">Номер пасспорта (формат: 1111111)</label>
+                        <input type="text" class="form-control" id="passportNumber" th:field="*{passportNumber}" pattern="^\d{7}$" minlength="7" maxlength="7" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="passportIssuanceSource">Кем выдан</label>
+                        <input type="text" class="form-control" id="passportIssuanceSource" th:field="*{passportIssuanceSource}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="passportIssuanceDate">Дата выдачи</label>
+                        <input type="date" class="form-control" id="passportIssuanceDate" th:field="*{passportIssuanceDate}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="passportID">Идент. номер (формат: 14 символов - заглавные буквы или цифры)</label>
+                        <input type="text" class="form-control" id="passportID" th:field="*{passportID}" pattern="^[A-Z0-9]{14}$" minlength="14" maxlength="14" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="birthPlace">Место рождения</label>
+                        <input type="text" class="form-control" id="birthPlace" th:field="*{birthPlace}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="residenceCity">Город проживания</label>
+                        <!--                        TODO: список-->
+                        <input type="text" class="form-control" id="residenceCity" th:field="*{residenceCity}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="residenceAddress">Адрес проживания</label>
+                        <input type="text" class="form-control" id="residenceAddress" th:field="*{residenceAddress}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="homePhoneNumber">Телефон домашний (формат: +375111111111)</label>
+                        <input type="text" class="form-control" id="homePhoneNumber" th:field="*{homePhoneNumber}" pattern="^\+\d{12}$">
+                    </div>
+                    <div class="form-group">
+                        <label for="mobilePhoneNumber">Телефон мобильный (формат: +375111111111)</label>
+                        <input type="text" class="form-control" id="mobilePhoneNumber" th:field="*{mobilePhoneNumber}" pattern="^\+\d{12}$">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" th:field="*{email}">
+                    </div>
+                    <div class="form-group">
+                        <label for="jobPlace">Место работы</label>
+                        <input type="text" class="form-control" id="jobPlace" th:field="*{jobPlace}">
+                    </div>
+                    <div class="form-group">
+                        <label for="jobPosition">Должность</label>
+                        <input type="text" class="form-control" id="jobPosition" th:field="*{jobPosition}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="maritalStatus">Семейное положение</label>
+                        <!--                        TODO: список-->
+                        <input type="text" class="form-control" id="maritalStatus" th:field="*{maritalStatus}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="citizenship">Гражданство</label>
+                        <!--                        TODO: список-->
+                        <input type="text" class="form-control" id="citizenship" th:field="*{citizenship}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="disability">Инвалидность</label>
+                        <!--                        TODO: список-->
+                        <input type="text" class="form-control" id="disability" th:field="*{disability}" required>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="retiree" th:field="*{retiree}">
+                        <label class="form-check-label" for="retiree">Пенсионер</label>
+                    </div>
+                    <div class="form-group">
+                        <label for="revenue">Ежемесячный доход</label>
+                        <input type="number" class="form-control" id="revenue" th:field="*{revenue}">
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="reservist" th:field="*{reservist}">
+                        <label class="form-check-label" for="reservist">Военнообязанный</label>
+                    </div>
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+
