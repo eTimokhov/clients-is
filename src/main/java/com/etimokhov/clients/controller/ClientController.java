@@ -19,12 +19,15 @@ public class ClientController {
     }
 
     @GetMapping("/clients/{clientId}")
-    public String getClientInfo(@PathVariable Long clientId) {
+    public String getClientInfo(@PathVariable Long clientId, Model model) {
+        model.addAttribute("client", clientService.getClient(clientId));
         return "clientInfo";
     }
 
     @GetMapping("/clients/{clientId}/edit")
-    public String editClient(@PathVariable Long clientId) {
+    public String editClient(@PathVariable Long clientId, Model model) {
+        model.addAttribute("client", clientService.getClient(clientId));
+        model.addAttribute("dictionary", clientService.getDictionary());
         return "clientEdit";
     }
 
@@ -37,20 +40,20 @@ public class ClientController {
     @GetMapping("/clients/new")
     public String newClient(Model model) {
         model.addAttribute("client", clientService.getEmptyClientStub());
+        model.addAttribute("dictionary", clientService.getDictionary());
         return "clientEdit";
     }
 
     @PostMapping("/clients/save")
-    public String saveClient(@ModelAttribute Client client, Model model) {
+    public String saveClient(@ModelAttribute Client client) {
         Long clientId = clientService.saveClient(client);
         return "redirect:/clients/" + clientId;
     }
 
     @PostMapping("/clients/{clientId}/delete")
-    public String deleteClient(@PathVariable Long clientId, Model model) {
-        //TODO Delete
+    public String deleteClient(@PathVariable Long clientId) {
+        clientService.deleteClient(clientId);
         return "redirect:/clients";
     }
-
 
 }

@@ -13,8 +13,111 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div class="row">
-
+            <table class="table table-sm" th:object="${client}">
+                <tr>
+                    <td class="font-weight-bold">Фамилия</td>
+                    <td th:text="*{lastName}">-</td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold">Имя</td>
+                    <td th:text="*{firstName}">-</td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold">Отчество</td>
+                    <td th:text="*{patronymic}">-</td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold">Дата рождения</td>
+                    <td th:text="*{birthDate}">-</td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold">Серия пасспорта</td>
+                    <td th:text="*{passportSeries}">-</td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold">Номер пасспорта</td>
+                    <td th:text="*{passportNumber}">-</td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold">Кем выдан</td>
+                    <td th:text="*{passportIssuanceSource}">-</td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold">Дата выдачи</td>
+                    <td th:text="*{passportIssuanceDate}">-</td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold">Идент. номер</td>
+                    <td th:text="*{passportID}">-</td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold">Место рождения</td>
+                    <td th:text="*{birthPlace}">-</td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold">Город проживания</td>
+                    <td th:text="*{residenceCity.name}">-</td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold">Адрес проживания</td>
+                    <td th:text="*{residenceAddress}">-</td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold">Телефон домашний</td>
+                    <td th:text="*{homePhoneNumber}">-</td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold">Телефон мобильный</td>
+                    <td th:text="*{mobilePhoneNumber}">-</td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold">Email</td>
+                    <td th:text="*{email}">-</td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold">Место работы</td>
+                    <td th:text="*{jobPlace}">-</td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold">Должность</td>
+                    <td th:text="*{jobPosition}">-</td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold">Семейное положение</td>
+                    <td th:text="*{maritalStatus.name}">-</td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold">Гражданство</td>
+                    <td th:text="*{citizenship.name}">-</td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold">Инвалидность</td>
+                    <td th:text="*{disability.name}">-</td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold">Пенсионер</td>
+                    <td th:text="*{retiree} ? 'Да' : 'Нет'">-</td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold">Ежемесячный доход</td>
+                    <td th:text="*{revenue}">-</td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold">Военнообязанный</td>
+                    <td th:text="*{reservist} ? 'Да' : 'Нет'">-</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="d-flex justify-content-center">
+                <a th:href="@{~/clients}" class="btn btn-success">К списку</a>
+                <a th:href="@{~/clients/{id}/edit(id = ${client.id})}" class="btn btn-primary">Редактировать</a>
+                <form th:action="@{~/clients/{id}/delete(id = ${client.id})}" method="post">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                    <button type="submit" class="btn btn-danger">Удалить</button>
+                </form>
             </div>
         </div>
     </div>

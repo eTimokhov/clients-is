@@ -1,5 +1,7 @@
 package com.etimokhov.clients.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -29,6 +31,7 @@ public class Client {
 
     @Column
     @NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthDate;
 
     @Column
@@ -45,6 +48,7 @@ public class Client {
 
     @Column
     @NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date passportIssuanceDate;
 
     @Column

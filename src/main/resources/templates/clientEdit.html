@@ -57,8 +57,11 @@
                     </div>
                     <div class="form-group">
                         <label for="residenceCity">Город проживания</label>
-                        <!--                        TODO: список-->
-                        <input type="text" class="form-control" id="residenceCity" th:field="*{residenceCity}" required>
+                        <select class="form-control" id="residenceCity" th:field="${client.residenceCity}">
+                            <option th:each="city: ${dictionary['cityOptions']}" th:value="${city.id}"
+                                    th:text="${city.name}"
+                                    th:selected="${client.residenceCity != null && client.residenceCity.id == city.id}"></option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="residenceAddress">Адрес проживания</label>
@@ -82,22 +85,31 @@
                     </div>
                     <div class="form-group">
                         <label for="jobPosition">Должность</label>
-                        <input type="text" class="form-control" id="jobPosition" th:field="*{jobPosition}" required>
+                        <input type="text" class="form-control" id="jobPosition" th:field="*{jobPosition}">
                     </div>
                     <div class="form-group">
                         <label for="maritalStatus">Семейное положение</label>
-                        <!--                        TODO: список-->
-                        <input type="text" class="form-control" id="maritalStatus" th:field="*{maritalStatus}" required>
+                        <select class="form-control" id="maritalStatus" th:field="${client.maritalStatus}">
+                            <option th:each="maritalStatus: ${dictionary['maritalStatusOptions']}"
+                                    th:value="${maritalStatus.id}" th:text="${maritalStatus.name}"
+                                    th:selected="${client.maritalStatus != null && client.maritalStatus.id == maritalStatus.id}"></option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="citizenship">Гражданство</label>
-                        <!--                        TODO: список-->
-                        <input type="text" class="form-control" id="citizenship" th:field="*{citizenship}" required>
+                        <select class="form-control" id="citizenship" th:field="${client.citizenship}">
+                            <option th:each="citizenship: ${dictionary['citizenshipOptions']}" th:value="${citizenship.id}"
+                                    th:text="${citizenship.name}"
+                                    th:selected="${client.citizenship != null && client.citizenship.id == citizenship.id}"></option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="disability">Инвалидность</label>
-                        <!--                        TODO: список-->
-                        <input type="text" class="form-control" id="disability" th:field="*{disability}" required>
+                        <select class="form-control" id="disability" th:field="${client.disability}">
+                            <option th:each="disability: ${dictionary['disabilityOptions']}" th:value="${disability.id}"
+                                    th:text="${disability.name}"
+                                    th:selected="${client.disability != null && client.disability.id == disability.id}"></option>
+                        </select>
                     </div>
                     <div class="form-check">
                         <input type="checkbox" class="form-check-input" id="retiree" th:field="*{retiree}">
@@ -111,6 +123,7 @@
                         <input type="checkbox" class="form-check-input" id="reservist" th:field="*{reservist}">
                         <label class="form-check-label" for="reservist">Военнообязанный</label>
                     </div>
+                    <input type="hidden" th:field="*{id}"/>
                     <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
                     <button type="submit" class="btn btn-primary">Сохранить</button>
                 </form>
