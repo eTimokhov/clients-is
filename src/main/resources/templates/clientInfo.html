@@ -28,7 +28,7 @@
                 </tr>
                 <tr>
                     <td class="font-weight-bold">Дата рождения</td>
-                    <td th:text="*{birthDate}">-</td>
+                    <td th:text="${#dates.format(client.birthDate, 'dd-MM-yyyy')}">-</td>
                 </tr>
                 <tr>
                     <td class="font-weight-bold">Серия пасспорта</td>
@@ -44,7 +44,7 @@
                 </tr>
                 <tr>
                     <td class="font-weight-bold">Дата выдачи</td>
-                    <td th:text="*{passportIssuanceDate}">-</td>
+                    <td th:text="${#dates.format(client.passportIssuanceDate, 'dd-MM-yyyy')}">-</td>
                 </tr>
                 <tr>
                     <td class="font-weight-bold">Идент. номер</td>

@@ -15,49 +15,52 @@
         <div class="col-md-12">
             <div class="row d-flex justify-content-center">
                 <form class="col-md-6" th:action="@{~/clients/save}" th:object="${client}" method="post">
+                    <ul th:if="${#fields.hasErrors('*')}">
+                        <li class="text-danger" th:each="err : ${#fields.errors('*')}" th:text="${err}">Некорректные данные</li>
+                    </ul>
                     <div class="form-group col-xs-6">
                         <label for="lastName">Фамилия</label>
-                        <input type="text" class="form-control" id="lastName" th:field="*{lastName}" required>
+                        <input type="text" class="form-control" id="lastName" th:field="*{lastName}" th:errorclass="is-invalid" required>
                     </div>
                     <div class="form-group">
                         <label for="firstName">Имя</label>
-                        <input type="text" class="form-control" id="firstName" th:field="*{firstName}" required>
+                        <input type="text" class="form-control" id="firstName" th:field="*{firstName}" th:errorclass="is-invalid" required>
                     </div>
                     <div class="form-group">
                         <label for="patronymic">Отчество</label>
-                        <input type="text" class="form-control" id="patronymic" th:field="*{patronymic}" required>
+                        <input type="text" class="form-control" id="patronymic" th:field="*{patronymic}" th:errorclass="is-invalid" required>
                     </div>
                     <div class="form-group">
                         <label for="birthDate">Дата рождения</label>
-                        <input type="date" class="form-control" id="birthDate" th:field="*{birthDate}" required>
+                        <input type="date" class="form-control" id="birthDate" th:field="*{birthDate}" th:errorclass="is-invalid" required>
                     </div>
                     <div class="form-group">
                         <label for="passportSeries">Серия пасспорта (формат: AA)</label>
-                        <input type="text" class="form-control" id="passportSeries" th:field="*{passportSeries}" pattern="^[A-Z]{2}$" minlength="2" maxlength="2" required>
+                        <input type="text" class="form-control" id="passportSeries" th:field="*{passportSeries}" pattern="^[A-Z]{2}$" minlength="2" maxlength="2" th:errorclass="is-invalid" required>
                     </div>
                     <div class="form-group">
                         <label for="passportNumber">Номер пасспорта (формат: 1111111)</label>
-                        <input type="text" class="form-control" id="passportNumber" th:field="*{passportNumber}" pattern="^\d{7}$" minlength="7" maxlength="7" required>
+                        <input type="text" class="form-control" id="passportNumber" th:field="*{passportNumber}" pattern="^\d{7}$" minlength="7" maxlength="7" th:errorclass="is-invalid" required>
                     </div>
                     <div class="form-group">
                         <label for="passportIssuanceSource">Кем выдан</label>
-                        <input type="text" class="form-control" id="passportIssuanceSource" th:field="*{passportIssuanceSource}" required>
+                        <input type="text" class="form-control" id="passportIssuanceSource" th:field="*{passportIssuanceSource}" th:errorclass="is-invalid" required>
                     </div>
                     <div class="form-group">
                         <label for="passportIssuanceDate">Дата выдачи</label>
-                        <input type="date" class="form-control" id="passportIssuanceDate" th:field="*{passportIssuanceDate}" required>
+                        <input type="date" class="form-control" id="passportIssuanceDate" th:field="*{passportIssuanceDate}" th:errorclass="is-invalid" required>
                     </div>
                     <div class="form-group">
                         <label for="passportID">Идент. номер (формат: 14 символов - заглавные буквы или цифры)</label>
-                        <input type="text" class="form-control" id="passportID" th:field="*{passportID}" pattern="^[A-Z0-9]{14}$" minlength="14" maxlength="14" required>
+                        <input type="text" class="form-control" id="passportID" th:field="*{passportID}" pattern="^[A-Z0-9]{14}$" minlength="14" maxlength="14" th:errorclass="is-invalid" required>
                     </div>
                     <div class="form-group">
                         <label for="birthPlace">Место рождения</label>
-                        <input type="text" class="form-control" id="birthPlace" th:field="*{birthPlace}" required>
+                        <input type="text" class="form-control" id="birthPlace" th:field="*{birthPlace}" th:errorclass="is-invalid" required>
                     </div>
                     <div class="form-group">
                         <label for="residenceCity">Город проживания</label>
-                        <select class="form-control" id="residenceCity" th:field="${client.residenceCity}">
+                        <select class="form-control" id="residenceCity" th:field="${client.residenceCity}" th:errorclass="is-invalid">
                             <option th:each="city: ${dictionary['cityOptions']}" th:value="${city.id}"
                                     th:text="${city.name}"
                                     th:selected="${client.residenceCity != null && client.residenceCity.id == city.id}"></option>
@@ -65,31 +68,31 @@
                     </div>
                     <div class="form-group">
                         <label for="residenceAddress">Адрес проживания</label>
-                        <input type="text" class="form-control" id="residenceAddress" th:field="*{residenceAddress}" required>
+                        <input type="text" class="form-control" id="residenceAddress" th:field="*{residenceAddress}" th:errorclass="is-invalid" required>
                     </div>
                     <div class="form-group">
                         <label for="homePhoneNumber">Телефон домашний (формат: +375111111111)</label>
-                        <input type="text" class="form-control" id="homePhoneNumber" th:field="*{homePhoneNumber}" pattern="^\+\d{12}$">
+                        <input type="text" class="form-control" id="homePhoneNumber" th:field="*{homePhoneNumber}" pattern="^\+\d{12}$" maxlength="13" th:errorclass="is-invalid">
                     </div>
                     <div class="form-group">
                         <label for="mobilePhoneNumber">Телефон мобильный (формат: +375111111111)</label>
-                        <input type="text" class="form-control" id="mobilePhoneNumber" th:field="*{mobilePhoneNumber}" pattern="^\+\d{12}$">
+                        <input type="text" class="form-control" id="mobilePhoneNumber" th:field="*{mobilePhoneNumber}" pattern="^\+\d{12}$" maxlength="13" th:errorclass="is-invalid">
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="email" class="form-control" id="email" th:field="*{email}">
+                        <input type="email" class="form-control" id="email" th:field="*{email}" th:errorclass="is-invalid">
                     </div>
                     <div class="form-group">
                         <label for="jobPlace">Место работы</label>
-                        <input type="text" class="form-control" id="jobPlace" th:field="*{jobPlace}">
+                        <input type="text" class="form-control" id="jobPlace" th:field="*{jobPlace}" th:errorclass="is-invalid">
                     </div>
                     <div class="form-group">
                         <label for="jobPosition">Должность</label>
-                        <input type="text" class="form-control" id="jobPosition" th:field="*{jobPosition}">
+                        <input type="text" class="form-control" id="jobPosition" th:field="*{jobPosition}" th:errorclass="is-invalid">
                     </div>
                     <div class="form-group">
                         <label for="maritalStatus">Семейное положение</label>
-                        <select class="form-control" id="maritalStatus" th:field="${client.maritalStatus}">
+                        <select class="form-control" id="maritalStatus" th:field="${client.maritalStatus}" th:errorclass="is-invalid">
                             <option th:each="maritalStatus: ${dictionary['maritalStatusOptions']}"
                                     th:value="${maritalStatus.id}" th:text="${maritalStatus.name}"
                                     th:selected="${client.maritalStatus != null && client.maritalStatus.id == maritalStatus.id}"></option>
@@ -97,7 +100,7 @@
                     </div>
                     <div class="form-group">
                         <label for="citizenship">Гражданство</label>
-                        <select class="form-control" id="citizenship" th:field="${client.citizenship}">
+                        <select class="form-control" id="citizenship" th:field="${client.citizenship}" th:errorclass="is-invalid">
                             <option th:each="citizenship: ${dictionary['citizenshipOptions']}" th:value="${citizenship.id}"
                                     th:text="${citizenship.name}"
                                     th:selected="${client.citizenship != null && client.citizenship.id == citizenship.id}"></option>
@@ -105,22 +108,22 @@
                     </div>
                     <div class="form-group">
                         <label for="disability">Инвалидность</label>
-                        <select class="form-control" id="disability" th:field="${client.disability}">
+                        <select class="form-control" id="disability" th:field="${client.disability}" th:errorclass="is-invalid">
                             <option th:each="disability: ${dictionary['disabilityOptions']}" th:value="${disability.id}"
                                     th:text="${disability.name}"
                                     th:selected="${client.disability != null && client.disability.id == disability.id}"></option>
                         </select>
                     </div>
                     <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="retiree" th:field="*{retiree}">
+                        <input type="checkbox" class="form-check-input" id="retiree" th:field="*{retiree}" th:errorclass="is-invalid">
                         <label class="form-check-label" for="retiree">Пенсионер</label>
                     </div>
                     <div class="form-group">
                         <label for="revenue">Ежемесячный доход</label>
-                        <input type="number" class="form-control" id="revenue" th:field="*{revenue}">
+                        <input type="number" class="form-control" id="revenue" th:field="*{revenue}" th:errorclass="is-invalid">
                     </div>
                     <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="reservist" th:field="*{reservist}">
+                        <input type="checkbox" class="form-check-input" id="reservist" th:field="*{reservist}" th:errorclass="is-invalid">
                         <label class="form-check-label" for="reservist">Военнообязанный</label>
                     </div>
                     <input type="hidden" th:field="*{id}"/>

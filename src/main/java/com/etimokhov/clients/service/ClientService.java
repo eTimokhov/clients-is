@@ -62,4 +62,18 @@ public class ClientService {
     public void deleteClient(Long clientId) {
         clientRepository.deleteById(clientId);
     }
+
+    public boolean isPassportDuplicated(Client client) {
+        return clientRepository.findAll().stream()
+                .filter(c -> c.getId() != client.getId())
+                .map(c -> c.getPassportSeries() + c.getPassportNumber())
+                .anyMatch(passport -> passport.equals(client.getPassportSeries() + client.getPassportNumber()));
+    }
+
+    public boolean isPassportIdDuplicated(Client client) {
+        return clientRepository.findAll().stream()
+                .filter(c -> c.getId() != client.getId())
+                .map(c -> c.getPassportID())
+                .anyMatch(passportId -> passportId.equals(client.getPassportID()));
+    }
 }

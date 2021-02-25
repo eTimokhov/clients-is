@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -36,10 +37,12 @@ public class Client {
 
     @Column
     @NotNull
+    @Pattern(regexp = "^[A-Z]{2}$")
     private String passportSeries;
 
     @Column
     @NotNull
+    @Pattern(regexp = "^\\d{7}$")
     private String passportNumber;
 
     @Column
@@ -53,6 +56,7 @@ public class Client {
 
     @Column
     @NotNull
+    @Pattern(regexp = "^[A-Z0-9]{14}$")
     private String passportID;
 
     @Column
@@ -68,9 +72,11 @@ public class Client {
     private String residenceAddress;
 
     @Column
+    @Pattern(regexp = "(^$|^\\+\\d{12}$)")
     private String homePhoneNumber;
 
     @Column
+    @Pattern(regexp = "(^$|^\\+\\d{12}$)")
     private String mobilePhoneNumber;
 
     @Column

@@ -33,7 +33,7 @@
                         <td th:text="${client.lastName}">-</td>
                         <td th:text="${client.firstName}">-</td>
                         <td th:text="${client.patronymic}">-</td>
-                        <td th:text="${client.birthDate}">-</td>
+                        <td th:text="${#dates.format(client.birthDate, 'dd-MM-yyyy')}">-</td>
                         <td th:text="${client.mobilePhoneNumber}">-</td>
                         <td>
                             <a class="btn btn-primary" th:href="@{~/clients/{id}(id=${client.id})}">Подробнее...</a>
